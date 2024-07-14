@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Product Slider</title>
+    <style>
+        .product-slider-container {
+            max-width: 90%;
+            margin: 20px auto;
+            position: relative;
+        }
+
+        .product-items {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .product-items::-webkit-scrollbar {
+            display: none;
+        }
+
+        .product-item {
+            flex: 0 0 250px;
+            margin: 0 15px;
+            scroll-snap-align: start;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-details {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .product-details button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .product-details button:hover {
+            background-color: #0056b3;
+        }
+
+        .product-details p {
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .slider-controls {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .slider-controls.prev {
+            left: 10px;
+        }
+
+        .slider-controls.next {
+            right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="product-slider-container">
+        <div class="product-items">
+            <div class="product-item">
+                <div class="product-image">
+                    <img src="products/apparel1.jpg" alt="Men's Suit">
+                </div>
+                <h3>Men's Suit</h3>
+                <div class="product-details">
+                    <button>Add to Cart</button>
+                    <p>$10.00</p>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-image">
+                    <img src="products/apparel2.jpg" alt="Men's Suit">
+                </div>
+                <h3>Men's Suit</h3>
+                <div class="product-details">
+                    <button>Add to Cart</button>
+                    <p>$10.00</p>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-image">
+                    <img src="products/apparel3.jpg" alt="Men's Suit">
+                </div>
+                <h3>Men's Suit</h3>
+                <div class="product-details">
+                    <button>Add to Cart</button>
+                    <p>$10.00</p>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-image">
+                    <img src="products/apparel1.jpg" alt="Men's Suit">
+                </div>
+                <h3>Men's Suit</h3>
+                <div class="product-details">
+                    <button>Add to Cart</button>
+                    <p>$10.00</p>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-image">
+                    <img src="products/apparel2.jpg" alt="Men's Suit">
+                </div>
+                <h3>Men's Suit</h3>
+                <div class="product-details">
+                    <button>Add to Cart</button>
+                    <p>$10.00</p>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-image">
+                    <img src="products/apparel3.jpg" alt="Men's Suit">
+                </div>
+                <h3>Men's Suit</h3>
+                <div class="product-details">
+                    <button>Add to Cart</button>
+                    <p>$10.00</p>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-image">
+                    <img src="products/apparel1.jpg" alt="Men's Suit">
+                </div>
+                <h3>Men's Suit</h3>
+                <div class="product-details">
+                    <button>Add to Cart</button>
+                    <p>$10.00</p>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-image">
+                    <img src="products/apparel2.jpg" alt="Men's Suit">
+                </div>
+                <h3>Men's Suit</h3>
+                <div class="product-details">
+                    <button>Add to Cart</button>
+                    <p>$10.00</p>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-image">
+                    <img src="products/apparel3.jpg" alt="Men's Suit">
+                </div>
+                <h3>Men's Suit</h3>
+                <div class="product-details">
+                    <button>Add to Cart</button>
+                    <p>$10.00</p>
+                </div>
+            </div>
+            <!-- Add more product items as needed -->
+        </div>
+        <div class="slider-controls prev">&lt;</div>
+        <div class="slider-controls next">&gt;</div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const productItems = document.querySelector('.product-items');
+            const prevBtn = document.querySelector('.slider-controls.prev');
+            const nextBtn = document.querySelector('.slider-controls.next');
+
+            function scrollProducts(direction) {
+                const itemWidth = productItems.firstElementChild.offsetWidth + 30; // 30 is the margin (15px each side)
+                const scrollAmount = direction === 'prev' ? -itemWidth : itemWidth;
+                productItems.scrollBy({
+                    left: scrollAmount,
+                    behavior: 'smooth'
+                });
+                toggleButtonVisibility();
+            }
+
+            prevBtn.addEventListener('click', () => scrollProducts('prev'));
+            nextBtn.addEventListener('click', () => scrollProducts('next'));
+
+            function handleInfiniteScroll() {
+                const itemWidth = productItems.firstElementChild.offsetWidth + 30; 
+                const scrollLeft = productItems.scrollLeft;
+                const scrollWidth = productItems.scrollWidth - productItems.clientWidth;
+
+                if (scrollLeft >= scrollWidth) {
+                    productItems.scrollLeft = 0;
+                }
+                toggleButtonVisibility();
+            }
+
+            productItems.addEventListener('scroll', handleInfiniteScroll);
+
+            function toggleButtonVisibility() {
+                const scrollLeft = productItems.scrollLeft;
+                const scrollWidth = productItems.scrollWidth - productItems.clientWidth;
+
+                prevBtn.style.display = scrollLeft === 0 ? 'none' : 'block';
+                nextBtn.style.display = scrollLeft >= scrollWidth ? 'none' : 'block';
+            }
+
+            function adjustScrollingBehavior() {
+                if (window.innerWidth < 768) {
+                    productItems.style.scrollSnapType = 'none';
+                    autoSlide();
+                } else {
+                    productItems.style.scrollSnapType = 'x mandatory';
+                    clearInterval(autoSlideInterval);
+                }
+                toggleButtonVisibility();
+            }
+
+            let autoSlideInterval;
+
+            function autoSlide() {
+                autoSlideInterval = setInterval(() => {
+                    const itemWidth = productItems.firstElementChild.offsetWidth + 30; 
+                    const scrollWidth = productItems.scrollWidth - productItems.clientWidth;
+                    const scrollLeft = productItems.scrollLeft;
+
+                    if (scrollLeft >= scrollWidth) {
+                        productItems.scrollLeft = 0;
+                    } else {
+                        productItems.scrollBy({
+                            left: itemWidth,
+                            behavior: 'smooth'
+                        });
+                    }
+                }, 2000); // Adjust the interval as needed
+            }
+
+            window.addEventListener('load', adjustScrollingBehavior);
+            window.addEventListener('resize', adjustScrollingBehavior);
+        });
+    </script>
+</body>
+
+</html>
