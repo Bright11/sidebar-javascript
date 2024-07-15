@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPA Navigation</title>
+    <style>
+        .page {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/navigate" data-link>Home</a>
+        <a href="/about" data-link>About</a>
+        <a href="/contact" data-link>Contact</a>
+    </nav>
+    <div id="app">
+        <div id="home" class="page active">
+            <h1>Home Page</h1>
+            <p>Welcome to the home page!</p>
+        </div>
+        <div id="about" class="page">
+            <h1>About Page</h1>
+            <p>Learn more about us on this page.</p>
+        </div>
+        <div id="contact" class="page">
+            <h1>Contact Page</h1>
+            <p>Get in touch with us here.</p>
+        </div>
+    </div>
+    <script src="navigatejs.js"></script>
+</body>
+</html>

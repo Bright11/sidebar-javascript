@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Image Slider</title>
+    <style>
+        .product_img {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .product_img img {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+        }
+        .colors {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .color_image img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .color_image img:hover {
+            transform: scale(1.1);
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="product_img">
+            <img src="products/apparel1.jpg" alt="Main Product Image" id="mainProductImg">
+        </div>
+        <div class="colors">
+            <div class="color_image">
+                <img src="products/apparel1.jpg" alt="Product Image 1" class="myimg">
+            </div>
+            <div class="color_image">
+                <img src="products/apparel2.jpg" alt="Product Image 2" class="myimg">
+            </div>
+            <div class="color_image">
+                <img src="products/apparel3.jpg" alt="Product Image 3" class="myimg">
+            </div>
+            <div class="color_image">
+                <img src="products/apparel4.jpg" alt="Product Image 4" class="myimg">
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const mainImg = document.getElementById('mainProductImg');
+            const thumbnails = document.querySelectorAll('.myimg');
+            
+            thumbnails.forEach(thumbnail => {
+                thumbnail.addEventListener('click', function() {
+                    mainImg.src = this.src;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
