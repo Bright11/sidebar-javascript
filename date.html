@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+    
+    <!-- For example, if you choose Flatpickr, you can include it in your project: -->
+<form action="">
+    <input type="text" wire:model="expires_at" placeholder="Enter expiration date (dd-mm-yyyy)" required id="expires_at">
+
+</form>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            flatpickr("#expires_at", {
+                dateFormat: "d-m-Y", // Set the desired format
+                minDate: "today" // Prevent past dates
+            });
+        });
+    </script>
+</body>
+</html>

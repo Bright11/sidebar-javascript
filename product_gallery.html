@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Draggable Product Gallery</title>
+    <style>
+      .product_gallery {
+        display: flex;
+        overflow: hidden;
+        width: 100%;
+        cursor: grab;
+      }
+
+      .product_gallery_item {
+        flex: 0 0 auto;
+        width: 25%;
+      }
+
+      .product_gallery_item img {
+        width: 100%;
+        display: block;
+      }
+
+      .active {
+        cursor: grabbing;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="product_gallery">
+      <div class="product_gallery_item">
+        <img src="products/electronic1.jpg" alt="" />
+      </div>
+      <div class="product_gallery_item">
+        <img src="products/electronic1.jpg" alt="" />
+      </div>
+      <div class="product_gallery_item">
+        <img src="products/electronic1.jpg" alt="" />
+      </div>
+      <div class="product_gallery_item">
+        <img src="products/electronic1.jpg" alt="" />
+      </div>
+      <div class="product_gallery_item">
+        <img src="products/electronic1.jpg" alt="" />
+      </div>
+      <div class="product_gallery_item">
+        <img src="products/electronic1.jpg" alt="" />
+      </div>
+    </div>
+
+    <script>
+      const pro_gallery = document.querySelector(".product_gallery");
+
+      let isDown = false;
+      let startx;
+      let scrollleft;
+
+      pro_gallery.addEventListener("mousedown", (e) => {
+        isDown = true;
+        pro_gallery.classList.add("active");
+        startx = e.pageX - pro_gallery.offsetLeft;
+        scrollleft = pro_gallery.scrollLeft;
+      });
+
+      pro_gallery.addEventListener("mouseleave", () => {
+        isDown = false;
+        pro_gallery.classList.remove("active");
+      });
+
+      pro_gallery.addEventListener("mouseup", () => {
+        isDown = false;
+        pro_gallery.classList.remove("active");
+      });
+
+      pro_gallery.addEventListener("mousemove", (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+
+        const x = e.pageX - pro_gallery.offsetLeft;
+        const walk = (x - startx) * 2; // Multiply by 2 for faster scroll
+        pro_gallery.scrollLeft = scrollleft - walk;
+      });
+
+      const btn_next = document.querySelector(".btn_next");
+
+      const btn_prev = document.querySelector(".btn_prev");
+
+      btn_next.addEventListener("click", () => {
+        pro_gallery.scrollLeft += pro_gallery.clientWidth / 2;
+      });
+
+      btn_prev.addEventListener("click", () => {
+        pro_gallery.scrollLeft -= pro_gallery.clientWidth / 2;
+      });
+
+      // disable btn
+      // Disable buttons at the ends
+      function checkButtons() {
+        btn_prev.disabled = pro_gallery.scrollLeft <= 0;
+        btn_next.disabled =
+          pro_gallery.scrollLeft >=
+          pro_gallery.scrollWidth - pro_gallery.clientWidth;
+      }
+
+      pro_gallery.addEventListener("scroll", checkButtons);
+
+      // Initial button state check
+      checkButtons();
+    </script>
+  </body>
+</html>
